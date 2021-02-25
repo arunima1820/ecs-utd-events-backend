@@ -28,6 +28,8 @@ where "DateTime" is a string of the form "yyyy-mm-ddThh:mm:ssZ".
 |Find all|	GET|	/api/events/all|	Retrieve all events in the database|
 |Find single|	GET|	/api/events/{event_id}|	Retrieves the event with id {event_id}|
 |Delete|	DELETE|	/api/events/{event_id}|	Deletes the event with id {event_id}|
+|Find all events by an org| GET| /api/events/org={org_slug}| Retrieves events where at least one of the orgs matches {org_slug}|
+|Find events within date range| GET| /api/events/date/start={startTime}&end={endTime}| Get all events within a specific date range, must provide both startTime and endTime in the following format: "yyyy-mm-ddThh:mm:ssZ". You can supply "none" to ONE of the variables to fallback to a default that encapsulates all past or future events.|
 
 ### Organizations
 #### Data Model
