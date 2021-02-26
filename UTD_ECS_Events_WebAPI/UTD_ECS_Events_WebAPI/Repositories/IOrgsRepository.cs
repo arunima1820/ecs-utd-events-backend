@@ -9,6 +9,7 @@ namespace UTD_ECS_Events_WebAPI.Repositories
     public interface IOrgsRepository
     {
         Task<IEnumerable<OrgModel>> GetOrgs();
+        Task<OrgModel> GetSingleOrg(string id);
         Task<string> CreateOrg(OrgModel orgModel);
         void DeleteOrg(string id);
     }

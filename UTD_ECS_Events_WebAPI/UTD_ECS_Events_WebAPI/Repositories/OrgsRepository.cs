@@ -38,6 +38,20 @@ namespace UTD_ECS_Events_WebAPI.Repositories
                 .ToList();
         }
 
+        public async Task<OrgModel> GetSingleOrg(string id)
+        {
+            DocumentReference docRef = _db.Collection("organizations").Document(id);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists)
+            {
+                return snapshot.ConvertTo<OrgModel>();
+            }
+            else
+            {
+                throw new ArgumentException("Document with this id does not exist: " + id);
+            }
+        }
+
         public async Task<string> CreateOrg(OrgModel myOrg)
         {
             DocumentReference docRef = _db.Collection("organizations").Document(myOrg.Slug);

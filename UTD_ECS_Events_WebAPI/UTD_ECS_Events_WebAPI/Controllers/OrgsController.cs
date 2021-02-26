@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UTD_ECS_Events_WebAPI.Models;
@@ -20,14 +22,29 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             _orgsService = orgsService;
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<string>), 200)]
-        [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
-        [ProducesResponseType(500)]
+        [HttpGet("all")]
         public ActionResult<List<OrgModel>> Get()
         {
             var events = _orgsService.GetOrgs();
             return events.ToList();
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<OrgModel> GetSingleEvent(string id)
+        {
+            try
+            {
+                return _orgsService.GetSingleOrg(id);
+            }
+            catch (Exception)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format("No org with ID = {0}", id)),
+                    ReasonPhrase = "Organization Id Not Found"
+                };
+                throw new System.Web.Http.HttpResponseException(resp);
+            }
         }
 
         [HttpPost]
