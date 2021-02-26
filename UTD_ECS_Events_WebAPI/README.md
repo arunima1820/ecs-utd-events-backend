@@ -53,7 +53,8 @@ where "DateTime" is a string of the form "yyyy-mm-ddThh:mm:ssZ".
 |Command|	Method|	Route|	Description|
 |-------|-------|------|-------------|
 |Create|	POST|	/api/orgs|	Create an organization. Organization must be specified as JSON in body of request (slug REQUIRED). Id (slug) returned on successful POST|
-|Find all|	GET|	/api/orgs	|Retrieve all organizations in the database|
+|Find all|	GET|	/api/orgs/all	|Retrieve all organizations in the database|
+|Find single|	GET|	/api/orgs/{org_slug}	|Retrieve the organization with id/slug {org_slug}|
 |Delete|	DELETE|	/api/orgs/{org_slug}|	Deletes the organization with id {org_slug}|
 
 ## Running on local without Visual Studio
