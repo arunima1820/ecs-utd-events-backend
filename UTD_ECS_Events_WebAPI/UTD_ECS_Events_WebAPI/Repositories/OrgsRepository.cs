@@ -38,7 +38,7 @@ namespace UTD_ECS_Events_WebAPI.Repositories
                 .ToList();
         }
 
-        public async Task<OrgModel> GetSingleOrg(string id)
+        public async Task<OrgModel> GetSingleOrgById(string id)
         {
             DocumentReference docRef = _db.Collection("organizations").Document(id);
             DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
@@ -49,6 +49,25 @@ namespace UTD_ECS_Events_WebAPI.Repositories
             else
             {
                 throw new ArgumentException("Document with this id does not exist: " + id);
+            }
+        }
+
+        public async Task<OrgModel> GetSingleOrgBySlug(string slug)
+        {
+            Query query = _db.Collection("organizations")
+                .WhereEqualTo("Slug",slug);
+            QuerySnapshot snapshot = await query.GetSnapshotAsync();
+            if(snapshot.Documents.Count == 0)
+            {
+                throw new ArgumentException("Organization with this slug does not exist: " + slug);
+            }
+            else if (snapshot.Documents.Count == 1)
+            {
+                return snapshot.Documents.ElementAt(1).ConvertTo<OrgModel>();
+            }
+            else
+            {
+                throw new ArgumentException("Multiple organizations with this slug exist: " + slug);
             }
         }
 

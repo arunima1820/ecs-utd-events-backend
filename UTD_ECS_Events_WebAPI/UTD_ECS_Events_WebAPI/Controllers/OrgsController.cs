@@ -30,11 +30,11 @@ namespace UTD_ECS_Events_WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<OrgModel> GetSingleEvent(string id)
+        public ActionResult<OrgModel> GetSingleOrgById(string id)
         {
             try
             {
-                return _orgsService.GetSingleOrg(id);
+                return _orgsService.GetSingleOrgById(id);
             }
             catch (Exception)
             {
@@ -42,6 +42,24 @@ namespace UTD_ECS_Events_WebAPI.Controllers
                 {
                     Content = new StringContent(string.Format("No org with ID = {0}", id)),
                     ReasonPhrase = "Organization Id Not Found"
+                };
+                throw new System.Web.Http.HttpResponseException(resp);
+            }
+        }
+
+        [HttpGet("{slug}")]
+        public ActionResult<OrgModel> GetSingleOrgBySlug(string slug)
+        {
+            try
+            {
+                return _orgsService.GetSingleOrgBySlug(slug);
+            }
+            catch (Exception)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format("No org with slug = {0}", slug)),
+                    ReasonPhrase = "Organization Slug Not Found"
                 };
                 throw new System.Web.Http.HttpResponseException(resp);
             }

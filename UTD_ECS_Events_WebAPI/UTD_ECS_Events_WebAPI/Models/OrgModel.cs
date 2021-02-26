@@ -10,7 +10,7 @@ namespace UTD_ECS_Events_WebAPI.Models
     public class OrgModel
     {
         [FirestoreDocumentId]
-        public string Slug { get; set; }
+        public string UId { get; set; }
         [FirestoreProperty]
         public string Name { get; set; }
         [FirestoreProperty]
@@ -19,6 +19,8 @@ namespace UTD_ECS_Events_WebAPI.Models
         public string Website { get; set; }
         [FirestoreProperty]
         public string Description { get; set; }
+        [FirestoreProperty]
+        public string Slug { get; set; }
         [FirestoreProperty]
         public Dictionary<string,string> SocialMedia { get; set; }
     }

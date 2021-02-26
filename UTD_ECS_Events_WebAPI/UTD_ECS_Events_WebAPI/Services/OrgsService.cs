@@ -21,9 +21,14 @@ namespace UTD_ECS_Events_WebAPI.Services
             return _orgsRepository.GetOrgs().Result;
         }
         
-        public OrgModel GetSingleOrg(string id)
+        public OrgModel GetSingleOrgById(string id)
         {
-            return _orgsRepository.GetSingleOrg(id).Result;
+            return _orgsRepository.GetSingleOrgById(id).Result;
+        }
+
+        public OrgModel GetSingleOrgBySlug(string slug)
+        {
+            return _orgsRepository.GetSingleOrgBySlug(slug).Result;
         }
 
         public string CreateOrg(OrgModel orgModel)
