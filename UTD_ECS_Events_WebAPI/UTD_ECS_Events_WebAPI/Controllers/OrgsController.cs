@@ -47,7 +47,7 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             }
         }
 
-        [HttpGet("{slug}")]
+        [HttpGet("slug={slug}")]
         public ActionResult<OrgModel> GetSingleOrgBySlug(string slug)
         {
             try

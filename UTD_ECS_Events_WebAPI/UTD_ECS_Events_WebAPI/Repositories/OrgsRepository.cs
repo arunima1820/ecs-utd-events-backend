@@ -63,7 +63,12 @@ namespace UTD_ECS_Events_WebAPI.Repositories
             }
             else if (snapshot.Documents.Count == 1)
             {
-                return snapshot.Documents.ElementAt(1).ConvertTo<OrgModel>();
+                return snapshot.Documents
+                .Select(document =>
+                {
+                    return document.ConvertTo<OrgModel>();
+                }).ToList().ElementAt(0);
+
             }
             else
             {
@@ -73,7 +78,7 @@ namespace UTD_ECS_Events_WebAPI.Repositories
 
         public async Task<string> CreateOrg(OrgModel myOrg)
         {
-            DocumentReference docRef = _db.Collection("organizations").Document(myOrg.Slug);
+            DocumentReference docRef = _db.Collection("organizations").Document(myOrg.UId);
             await docRef.SetAsync(myOrg);
             return docRef.Id;
         }
