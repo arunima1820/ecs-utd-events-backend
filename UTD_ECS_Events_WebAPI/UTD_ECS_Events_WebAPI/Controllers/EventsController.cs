@@ -76,6 +76,12 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             return events.ToList();
         }
 
+        [HttpPut]
+        public string Put([FromBody] EventModel eventModel)
+        {
+            return _eventsService.UpdateEvent(eventModel);
+        }
+
         [HttpPost]
         public string Post([FromBody] EventModel eventModel)
         {

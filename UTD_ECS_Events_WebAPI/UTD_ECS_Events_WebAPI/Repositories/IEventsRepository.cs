@@ -13,6 +13,7 @@ namespace UTD_ECS_Events_WebAPI.Repositories
         Task<string> CreateEvent(EventModel eventModel);
         Task<EventModel> GetSingleEvent(string id);
         Task<List<EventModel>> GetEventsByOrg(string org);
+        Task<string> UpdateEvent(EventModel myEvent);
         void DeleteEvent(string id);
     }
 }

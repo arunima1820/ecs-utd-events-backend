@@ -36,6 +36,11 @@ namespace UTD_ECS_Events_WebAPI.Services
             return _eventsRepository.GetEventsByOrg(org).Result;
         }
 
+        public string UpdateEvent(EventModel eventModel)
+        {
+            return _eventsRepository.UpdateEvent(eventModel).Result;
+        }
+
         public string CreateEvent(EventModel eventModel)
         {
             return _eventsRepository.CreateEvent(eventModel).Result;

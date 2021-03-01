@@ -10,6 +10,7 @@ using Grpc.Core;
 using Serilog;
 using UTD_ECS_Events_WebAPI.Models;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace UTD_ECS_Events_WebAPI.Repositories
 {
@@ -82,6 +83,24 @@ namespace UTD_ECS_Events_WebAPI.Repositories
                     return document.ConvertTo<EventModel>();
                 })
                 .ToList();
+        }
+
+        public async Task<string> UpdateEvent(EventModel myEvent)
+        {
+            DocumentReference docRef = _db.Collection("events").Document(myEvent.Id);
+            myEvent.StartTime = myEvent.StartTime.ToUniversalTime();
+            myEvent.EndTime = myEvent.EndTime.ToUniversalTime();
+            myEvent.LastUpdated = myEvent.LastUpdated.ToUniversalTime();
+            Dictionary<string, object> updates = new Dictionary<string, object>();
+
+            PropertyInfo[] properties = typeof(EventModel).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                updates.Add(property.Name, property.GetValue(myEvent));
+            }
+
+            await docRef.UpdateAsync(updates);
+            return docRef.Id;
         }
 
         public async Task<string> CreateEvent(EventModel myEvent)

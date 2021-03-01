@@ -12,6 +12,7 @@ namespace UTD_ECS_Events_WebAPI.Services
         IEnumerable<EventModel> GetEventsByDate(DateTime start, DateTime end);
         EventModel GetSingleEvent(string id);
         IEnumerable<EventModel> GetEventsByOrg(string org);
+        string UpdateEvent(EventModel eventModel);
         string CreateEvent(EventModel eventModel);
         void DeleteEvent(string id);
     }
