@@ -13,7 +13,7 @@
     "endTime": "DateTime",
     "description": "string",
     "orgs": [
-        "string",
+        "org_slug: string",
         "ACM"
     ],
     "lastUpdated": "DateTime"
@@ -35,6 +35,7 @@ where "DateTime" is a string of the form "yyyy-mm-ddThh:mm:ssZ".
 #### Data Model
 ```
 {
+    "uId": "string",
     "slug": "string",
     "name": "string",
     "shortName": "string",
@@ -47,14 +48,15 @@ where "DateTime" is a string of the form "yyyy-mm-ddThh:mm:ssZ".
     }
 }
 ```
-`Note: slug is the Id for an Organization object`
+`Note: uId is the id of the organization. This must be the same uId received after logging in.`
 
 #### Controller
 |Command|	Method|	Route|	Description|
 |-------|-------|------|-------------|
 |Create|	POST|	/api/orgs|	Create an organization. Organization must be specified as JSON in body of request (slug REQUIRED). Id (slug) returned on successful POST|
 |Find all|	GET|	/api/orgs/all	|Retrieve all organizations in the database|
-|Find single|	GET|	/api/orgs/{org_slug}	|Retrieve the organization with id/slug {org_slug}|
+|Find single by uid|	GET|	/api/orgs/{org_id}	|Retrieve the organization with id {org_id}|
+|Find single by slug|	GET|	/api/orgs/slug={org_slug}	|Retrieve the organization with slug {org_slug}|
 |Delete|	DELETE|	/api/orgs/{org_slug}|	Deletes the organization with id {org_slug}|
 
 ## Running on local without Visual Studio
