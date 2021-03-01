@@ -10,6 +10,7 @@ using Grpc.Core;
 using Serilog;
 using UTD_ECS_Events_WebAPI.Models;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace UTD_ECS_Events_WebAPI.Repositories
 {
@@ -74,6 +75,21 @@ namespace UTD_ECS_Events_WebAPI.Repositories
             {
                 throw new ArgumentException("Multiple organizations with this slug exist: " + slug);
             }
+        }
+
+        public async Task<string> UpdateOrg(OrgModel myOrg)
+        {
+            DocumentReference docRef = _db.Collection("organizations").Document(myOrg.UId);
+            Dictionary<string, object> updates = new Dictionary<string, object>();
+
+            PropertyInfo[] properties = typeof(OrgModel).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                updates.Add(property.Name, property.GetValue(myOrg));
+            }
+
+            await docRef.UpdateAsync(updates);
+            return docRef.Id;
         }
 
         public async Task<string> CreateOrg(OrgModel myOrg)

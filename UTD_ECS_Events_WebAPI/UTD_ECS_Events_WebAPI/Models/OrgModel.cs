@@ -22,6 +22,8 @@ namespace UTD_ECS_Events_WebAPI.Models
         [FirestoreProperty]
         public string Slug { get; set; }
         [FirestoreProperty]
+        public string ImageUrl { get; set; }
+        [FirestoreProperty]
         public Dictionary<string,string> SocialMedia { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace UTD_ECS_Events_WebAPI.Repositories
         Task<IEnumerable<OrgModel>> GetOrgs();
         Task<OrgModel> GetSingleOrgById(string id);
         Task<OrgModel> GetSingleOrgBySlug(string slug);
+        Task<string> UpdateOrg(OrgModel myOrg);
         Task<string> CreateOrg(OrgModel orgModel);
         void DeleteOrg(string id);
     }

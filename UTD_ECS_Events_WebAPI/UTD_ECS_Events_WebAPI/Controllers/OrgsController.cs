@@ -65,6 +65,12 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             }
         }
 
+        [HttpPut]
+        public string Put([FromBody] OrgModel orgModel)
+        {
+            return _orgsService.UpdateOrg(orgModel);
+        }
+
         [HttpPost]
         public string Post([FromBody] OrgModel orgModel)
         {

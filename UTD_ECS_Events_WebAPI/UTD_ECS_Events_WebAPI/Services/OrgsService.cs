@@ -31,6 +31,11 @@ namespace UTD_ECS_Events_WebAPI.Services
             return _orgsRepository.GetSingleOrgBySlug(slug).Result;
         }
 
+        public string UpdateOrg(OrgModel orgModel)
+        {
+            return _orgsRepository.UpdateOrg(orgModel).Result;
+        }
+
         public string CreateOrg(OrgModel orgModel)
         {
             return _orgsRepository.CreateOrg(orgModel).Result;

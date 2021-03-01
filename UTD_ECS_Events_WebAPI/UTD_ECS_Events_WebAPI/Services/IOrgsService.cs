@@ -11,6 +11,7 @@ namespace UTD_ECS_Events_WebAPI.Services
         IEnumerable<OrgModel> GetOrgs();
         OrgModel GetSingleOrgById(string id);
         OrgModel GetSingleOrgBySlug(string slug);
+        string UpdateOrg(OrgModel orgModel);
         string CreateOrg(OrgModel orgModel);
         void DeleteOrg(string id);
     }
