@@ -16,6 +16,10 @@
         "org_slug: string",
         "ACM"
     ],
+    "tags": [
+        "name: string",
+        "combinatorial-graph-algorithms"
+    ],
     "lastUpdated": "DateTime"
 }
 ```
