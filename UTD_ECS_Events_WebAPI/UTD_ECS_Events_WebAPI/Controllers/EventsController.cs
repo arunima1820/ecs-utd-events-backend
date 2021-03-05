@@ -48,6 +48,12 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             }
         }
 
+        [HttpGet("error")]
+        public ActionResult<EventModel> ER()
+        {
+            throw new System.Web.Http.HttpResponseException(HttpStatusCode.NotFound);
+        }
+
         [HttpGet("date/start={start}&end={end}")]
         public ActionResult<List<EventModel>> GetEventsByDate(string start, string end)
         {

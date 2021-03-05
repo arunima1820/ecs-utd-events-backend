@@ -27,5 +27,7 @@ namespace UTD_ECS_Events_WebAPI.Models
         public List<string> Orgs { get; set; }
         [FirestoreProperty]
         public DateTime LastUpdated { get; set; }
+        [FirestoreProperty]
+        public List<string> Tags { get; set; }
     }
 }

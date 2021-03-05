@@ -41,6 +41,8 @@ namespace UTD_ECS_Events_WebAPI
             services.AddTransient<IEventsRepository, EventsRepository>();
             services.AddTransient<IOrgsRepository, OrgsRepository>();
             services.AddTransient<IOrgsService, OrgsService>();
+            services.AddTransient<ITagsRepository, TagsRepository>();
+            services.AddTransient<ITagsService, TagsService>();
 
             //    Serilog
             Log.Logger = new LoggerConfiguration()
