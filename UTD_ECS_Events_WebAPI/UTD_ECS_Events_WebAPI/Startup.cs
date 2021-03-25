@@ -13,6 +13,9 @@ namespace UTD_ECS_Events_WebAPI
 {
     public class Startup
     {
+        const string OnlyAllowHostedWebsiteEdit = "_onlyAllowHostedWebsiteEdit";
+        const string AllowAllRead = "_allowAllRead";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,14 +26,31 @@ namespace UTD_ECS_Events_WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //add cors service
-            services.AddCors(options => options.AddPolicy("Cors",
-                builder =>
-                {
-                    builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-                }));
+            // CORS allow all domains
+            //services.AddCors(options => 
+            //    options.AddPolicy("Cors",
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin()
+            //                .AllowAnyMethod()
+            //                .AllowAnyHeader();
+            //        })
+            //);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: OnlyAllowHostedWebsiteEdit,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://ecs-utdevents.web.app/");
+                                  });
+
+                options.AddPolicy(name: AllowAllRead,
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin();
+                                  });
+            });
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
@@ -66,7 +86,7 @@ namespace UTD_ECS_Events_WebAPI
                 app.UseHsts();
             }
 
-            app.UseCors("Cors");
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
