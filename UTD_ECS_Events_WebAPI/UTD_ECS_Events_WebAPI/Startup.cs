@@ -55,8 +55,6 @@ namespace UTD_ECS_Events_WebAPI
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             //    dependency injection
-            services.AddTransient<IFirestoreService, FirestoreService>();
-            services.AddTransient<IFirestoreRepository, FirestoreRepository>();
             services.AddTransient<IEventsService, EventsService>();
             services.AddTransient<IEventsRepository, EventsRepository>();
             services.AddTransient<IOrgsRepository, OrgsRepository>();
