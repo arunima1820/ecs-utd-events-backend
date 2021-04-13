@@ -18,15 +18,14 @@ namespace UTD_ECS_Events_WebAPI.Controllers
     public class TagsController : ControllerBase
     {
         private readonly ITagsService _tagsService;
-        const string OnlyAllowHostedWebsiteEdit = "_onlyAllowHostedWebsiteEdit";
-        const string AllowAllRead = "_allowAllRead";
+        //const string OnlyAllowHostedWebsiteEdit = "_onlyAllowHostedWebsiteEdit";
+        //const string AllowAllRead = "_allowAllRead";
 
         public TagsController(ITagsService tagsService)
         {
             _tagsService = tagsService;
         }
 
-        [EnableCors(AllowAllRead)]
         [HttpGet("all")]
         public ActionResult<List<TagModel>> GetAll()
         {
@@ -34,21 +33,21 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             return events.ToList();
         }
 
-        [EnableCors(OnlyAllowHostedWebsiteEdit)]
+        //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpPut]
         public string Put([FromBody] TagModel tagModel)
         {
             return _tagsService.UpdateTag(tagModel);
         }
 
-        [EnableCors(OnlyAllowHostedWebsiteEdit)]
+        //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpPost]
         public string Post([FromBody] TagModel tagModel)
         {
             return _tagsService.CreateTag(tagModel);
         }
 
-        [EnableCors(OnlyAllowHostedWebsiteEdit)]
+        //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpDelete("{id}")]
         public void Delete(string id)
         {

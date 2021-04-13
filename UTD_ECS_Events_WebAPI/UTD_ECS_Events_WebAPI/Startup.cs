@@ -37,22 +37,27 @@ namespace UTD_ECS_Events_WebAPI
             //        })
             //);
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: OnlyAllowHostedWebsiteEdit,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("https://ecs-utdevents.web.app/");
-                                  });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: OnlyAllowHostedWebsiteEdit,
+            //                      builder =>
+            //                      {
+            //                          builder.WithOrigins("https://example.com");
+            //                      });
 
-                options.AddPolicy(name: AllowAllRead,
-                                  builder =>
-                                  {
-                                      builder.AllowAnyOrigin();
-                                  });
-            });
+            //    options.AddPolicy(name: AllowAllRead,
+            //                      builder =>
+            //                      {
+            //                          builder.AllowAnyOrigin()
+            //                                .AllowAnyHeader()
+            //                                .AllowAnyMethod();
+            //                      });
+            //});
 
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddAuthorization();
+            services.AddControllers();
 
             //    dependency injection
             services.AddTransient<IEventsService, EventsService>();
@@ -84,9 +89,15 @@ namespace UTD_ECS_Events_WebAPI
                 app.UseHsts();
             }
 
-            app.UseCors();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
+            //app.UseCors(OnlyAllowHostedWebsiteEdit);
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            //app.UseMvc();
         }
     }
 }
