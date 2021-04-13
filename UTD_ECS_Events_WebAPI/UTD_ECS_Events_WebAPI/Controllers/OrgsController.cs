@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UTD_ECS_Events_WebAPI.Models;
 using UTD_ECS_Events_WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -70,18 +71,21 @@ namespace UTD_ECS_Events_WebAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public string Put([FromBody] OrgModel orgModel)
         {
             return _orgsService.UpdateOrg(orgModel);
         }
 
         [HttpPost]
+        [Authorize]
         public string Post([FromBody] OrgModel orgModel)
         {
             return _orgsService.CreateOrg(orgModel);
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(string id)
         {
             _orgsService.DeleteOrg(id);

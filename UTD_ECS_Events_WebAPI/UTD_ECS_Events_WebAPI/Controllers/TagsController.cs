@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using UTD_ECS_Events_WebAPI.Models;
@@ -35,6 +36,7 @@ namespace UTD_ECS_Events_WebAPI.Controllers
 
         //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpPut]
+        [Authorize]
         public string Put([FromBody] TagModel tagModel)
         {
             return _tagsService.UpdateTag(tagModel);
@@ -42,6 +44,7 @@ namespace UTD_ECS_Events_WebAPI.Controllers
 
         //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpPost]
+        [Authorize]
         public string Post([FromBody] TagModel tagModel)
         {
             return _tagsService.CreateTag(tagModel);
@@ -49,6 +52,7 @@ namespace UTD_ECS_Events_WebAPI.Controllers
 
         //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(string id)
         {
             _tagsService.DeleteTag(id);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UTD_ECS_Events_WebAPI.Models;
@@ -83,18 +84,21 @@ namespace UTD_ECS_Events_WebAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public string Put([FromBody] EventModel eventModel)
         {
             return _eventsService.UpdateEvent(eventModel);
         }
 
         [HttpPost]
+        [Authorize]
         public string Post([FromBody] EventModel eventModel)
         {
             return _eventsService.CreateEvent(eventModel);
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(string id)
         {
             _eventsService.DeleteEvent(id);
