@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using UTD_ECS_Events_WebAPI.Models;
 using UTD_ECS_Events_WebAPI.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,14 +18,12 @@ namespace UTD_ECS_Events_WebAPI.Controllers
     public class OrgsController : ControllerBase
     {
         private readonly IOrgsService _orgsService;
-        //const string OnlyAllowHostedWebsiteEdit = "_onlyAllowHostedWebsiteEdit";
 
         public OrgsController(IOrgsService orgsService)
         {
             _orgsService = orgsService;
         }
 
-        //[EnableCors(OnlyAllowHostedWebsiteEdit)]
         [HttpGet("all")]
         public ActionResult<List<OrgModel>> Get()
         {

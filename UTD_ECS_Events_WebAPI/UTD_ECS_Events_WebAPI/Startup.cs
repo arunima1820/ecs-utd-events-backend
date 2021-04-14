@@ -14,9 +14,8 @@ namespace UTD_ECS_Events_WebAPI
 {
     public class Startup
     {
-        const string OnlyAllowHostedWebsiteEdit = "_onlyAllowHostedWebsiteEdit";
-        const string AllowAllRead = "_allowAllRead";
         private const string PROJECT_ID = "utdecsevents-9bed0";
+        private const string ALLOW_ALL = "allowAll";
 
         public Startup(IConfiguration configuration)
         {
@@ -28,9 +27,9 @@ namespace UTD_ECS_Events_WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //CORS allow all domains
+            // CORS: allow all domains
             services.AddCors(options =>
-                options.AddPolicy("Cors",
+                options.AddPolicy(ALLOW_ALL,
                     builder =>
                     {
                         builder.AllowAnyOrigin()
@@ -39,39 +38,19 @@ namespace UTD_ECS_Events_WebAPI
                     })
             );
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: OnlyAllowHostedWebsiteEdit,
-            //                      builder =>
-            //                      {
-            //                          builder.WithOrigins("https://example.com");
-            //                      });
-
-            //    options.AddPolicy(name: AllowAllRead,
-            //                      builder =>
-            //                      {
-            //                          builder.AllowAnyOrigin()
-            //                                .AllowAnyHeader()
-            //                                .AllowAnyMethod();
-            //                      });
-            //});
-
-
-
-            // required for Firebase Auth
+            // Required for Firebase Auth
             void options(FirebaseAuthenticationOptions o)
             {
                 o.FirebaseProjectId = PROJECT_ID;
             }
 
-            // Required for Firebase Auth. Place above AddMvc()
             services.AddAuthentication(o =>
             {
                 o.DefaultScheme = "Default";
             }).AddScheme<FirebaseAuthenticationOptions, FirebaseAuthenticationHandler>("Default", options);
 
-            //services.AddControllers();
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
             //    dependency injection
             services.AddTransient<IEventsService, EventsService>();
             services.AddTransient<IEventsRepository, EventsRepository>();
@@ -102,15 +81,11 @@ namespace UTD_ECS_Events_WebAPI
                 app.UseHsts();
             }
 
-            app.UseCors();
+            // Order of function calls below VERY IMPORTANT!
+            // Check middleware order of events for .NET Core Web Api
             app.UseHttpsRedirection();
-            //app.UseRouting();
-            //app.UseCors(OnlyAllowHostedWebsiteEdit);
+            app.UseCors(ALLOW_ALL);
             app.UseAuthentication();
-            /*app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });*/
             app.UseMvc();
         }
     }
