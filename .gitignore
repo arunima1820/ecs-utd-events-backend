@@ -3,6 +3,7 @@
 
 # Database Key
 google.json
+*KEY.json
 
 # Deployment
 PublishProfiles/

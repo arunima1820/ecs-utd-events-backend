@@ -14,7 +14,7 @@ namespace UTD_ECS_Events_WebAPI
 {
     public class Startup
     {
-        private const string PROJECT_ID = "utdecsevents-9bed0";
+        private const string PROJECT_ID = Global.Project_Id;
         private const string ALLOW_ALL = "allowAll";
 
         public Startup(IConfiguration configuration)

@@ -16,12 +16,12 @@ namespace UTD_ECS_Events_WebAPI.Repositories
 {
     public class OrgsRepository : IOrgsRepository
     {
-        private const string PROJECT_ID = "utdecsevents-9bed0";
+        private const string PROJECT_ID = Global.Project_Id;
         private readonly FirestoreDb _db;
 
         public OrgsRepository()
         {
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", Path.Combine(AppContext.BaseDirectory + "/google.json"));
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", Path.Combine(AppContext.BaseDirectory + Global.Database_Key_File));
             _db = FirestoreDb.Create(PROJECT_ID);
             Log.Logger.Information("Created Firestore connection");
         }
