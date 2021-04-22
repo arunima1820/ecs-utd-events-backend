@@ -1,7 +1,7 @@
 # Back-End
 
 ## API Documentation
-All API calls go through the base URL `https://ecsutdevents.azurewebsites.net/api/`
+All API calls go through the base URL `https://ecsutdevents.azurewebsites.net/api/`.
 ### Events
 #### Data Model
 ```
