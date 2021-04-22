@@ -1,7 +1,7 @@
 # Back-End
 
 ## API Documentation
-All API calls go through the base URL `https://ecsutdevents.azurewebsites.net/api/`.
+All API calls go through the base URL `https://ecsutdevents.azurewebsites.net/`. For example, you can GET all events by visiting or using an HTTP GET request on `https://ecsutdevents.azurewebsites.net/api/events/all`.
 ### Events
 #### Data Model
 ```
