@@ -9,6 +9,9 @@ namespace UTD_ECS_Events_WebAPI.Services
     public interface ITagsService
     {
         IEnumerable<TagModel> GetTags();
+
+        TagModel GetTagById(string id);
+
         string UpdateTag(TagModel tagModel);
         string CreateTag(TagModel tagModel);
         void DeleteTag(string id);

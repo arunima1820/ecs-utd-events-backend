@@ -21,6 +21,11 @@ namespace UTD_ECS_Events_WebAPI.Services
             return _tagsRepository.GetTags().Result;
         }
 
+        public TagModel GetTagById(string id)
+        {
+            return _tagsRepository.GetTagById(id).Result;
+        }
+
         public string UpdateTag(TagModel tagModel)
         {
             return _tagsRepository.UpdateTag(tagModel).Result;
@@ -35,5 +40,8 @@ namespace UTD_ECS_Events_WebAPI.Services
         {
             _tagsRepository.DeleteTag(id);
         }
+        
+
+
     }
 }

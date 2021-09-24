@@ -13,6 +13,12 @@ namespace UTD_ECS_Events_WebAPI.Models
         public string Id { get; set; }
 
         [FirestoreProperty]
-        public string Name { get; set; }
+        public string Category { get; set; }
+
+        [FirestoreProperty]
+        public string Value { get; set; }
+
+        [FirestoreProperty]
+        public string Acronym { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace UTD_ECS_Events_WebAPI.Repositories
     public interface ITagsRepository
     {
         Task<IEnumerable<TagModel>> GetTags();
+
+        Task<TagModel> GetTagById(string tagId);
+
         Task<string> UpdateTag(TagModel myTag);
         Task<string> CreateTag(TagModel myTag);
         void DeleteTag(string id);

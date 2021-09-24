@@ -31,6 +31,12 @@ namespace UTD_ECS_Events_WebAPI.Controllers
             return events.ToList();
         }
 
+        [HttpGet("{id}")]
+        public TagModel GetTagById(string id)
+        {
+            return _tagsService.GetTagById(id);
+        }
+
         [HttpPut]
         [Authorize]
         public string Put([FromBody] TagModel tagModel)

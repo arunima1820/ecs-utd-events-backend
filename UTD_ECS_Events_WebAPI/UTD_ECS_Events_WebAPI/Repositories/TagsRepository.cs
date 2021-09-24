@@ -38,6 +38,25 @@ namespace UTD_ECS_Events_WebAPI.Repositories
                 .ToList();
         }
 
+
+        public async Task<TagModel> GetTagById(string tagId)
+        {
+            //Query query = _db.Collection("tags");
+            //QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+            DocumentReference documentRef = _db.Document("tags/" + tagId);
+
+            DocumentSnapshot snapshot = await documentRef.GetSnapshotAsync();
+
+            if (snapshot.Exists)
+              return snapshot.ConvertTo<TagModel>();
+            return null;
+
+
+        }
+
+
+
         public async Task<string> UpdateTag(TagModel myTag)
         {
             DocumentReference docRef = _db.Collection("tags").Document(myTag.Id);
