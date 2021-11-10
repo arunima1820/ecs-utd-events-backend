@@ -29,5 +29,7 @@ namespace UTD_ECS_Events_WebAPI.Models
         public DateTime LastUpdated { get; set; }
         [FirestoreProperty]
         public List<string> Tags { get; set; }
+        [FirestoreProperty]
+        public string Flyer { get; set; }
     }
 }
